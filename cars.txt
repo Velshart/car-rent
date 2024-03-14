@@ -1,0 +1,10 @@
+c;Toyota;Yaris;2020;200;false;0;
+c;Lexus;LC500;2021;1000;false;1;
+c;Honda;Civic;2018;400;false;2;
+c;Toyota;Supra;2022;700;false;3;
+c;BMW;M5;2021;800;false;4;
+c;Mercedes;AMG-GT;2015;750;false;5;
+c;Audi;R8;2023;900;false;6;
+m;Kawasaki;Ninja;2020;300;false;A;7;
+m;Honda;CBR500R;2017;200;false;A;8;
+c;Toyota;Aygo;2020;150;false;9;
