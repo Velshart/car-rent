@@ -49,7 +49,6 @@ public class RentingManager implements IVVehicleRepository {
             toReturn.setRented(false);
             vehiclesFromFile.set(id, toReturn);
 
-            //save vehiclesFromFile to cars.txt
             try(FileWriter fw = new FileWriter("cars.txt", false)) {
                 for (Vehicle vehicle : vehiclesFromFile) {
                     fw.write(vehicle.toCsv());
@@ -74,7 +73,6 @@ public class RentingManager implements IVVehicleRepository {
             while (scanner.hasNextLine()) {
                 if(vehiclesFromCsv.size() == 10) break;
                 String car = scanner.nextLine();
-                //System.out.println(car);
 
                 String[] attributes = car.split(";");
                 if (attributes[0].equals("c")) {
@@ -92,7 +90,7 @@ public class RentingManager implements IVVehicleRepository {
             }
             scanner.close();
         }catch (FileNotFoundException ex) {
-            ex.printStackTrace();
+            throw new RuntimeException(ex);
         }
         return vehiclesFromCsv;
     }

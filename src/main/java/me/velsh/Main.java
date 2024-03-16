@@ -11,12 +11,6 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         RentingManager rentingManager = new RentingManager();
-        //rentingManager.rentVehicle(0);
-        //rentingManager.returnVehicle(0);
-
-        //List<Vehicle> vehicleList = rentingManager.getVehicles();
-
-        //vehicleList.forEach(System.out::println);
         Scanner sc = new Scanner(System.in);
 
         System.out.println("--------");
