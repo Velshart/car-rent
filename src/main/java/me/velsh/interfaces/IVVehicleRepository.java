@@ -9,5 +9,5 @@ public interface IVVehicleRepository {
     void returnVehicle(int id);
     List<Vehicle> getVehicles();
 
-    void save(Vehicle vehicle);
+    void save(List<Vehicle> vehiclesToSave);
 }

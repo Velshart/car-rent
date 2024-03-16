@@ -1,9 +1,9 @@
 package me.velsh.manager;
 
-import me.velsh.objects.Car;
-import me.velsh.interfaces.IVVehicleRepository;
-import me.velsh.objects.Motorcycle;
 import me.velsh.abstraction.Vehicle;
+import me.velsh.interfaces.IVVehicleRepository;
+import me.velsh.objects.Car;
+import me.velsh.objects.Motorcycle;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -25,18 +25,19 @@ public class RentingManager implements IVVehicleRepository {
         List<Vehicle> vehiclesFromFile = getVehicles();
         Vehicle toRent = vehiclesFromFile.get(id);
 
-        if(!toRent.isRented()) {
+        if (!toRent.isRented()) {
             toRent.setRented(true);
             vehiclesFromFile.set(id, toRent);
-
-            try(FileWriter fw = new FileWriter("cars.txt", false)) {
+            /*
+                 try(FileWriter fw = new FileWriter("cars.txt", false)) {
                 for (Vehicle vehicle : vehiclesFromFile) {
                     fw.write(vehicle.toCsv());
                 }
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-
+             */
+            save(vehiclesFromFile);
         }
     }
 
@@ -45,17 +46,20 @@ public class RentingManager implements IVVehicleRepository {
         List<Vehicle> vehiclesFromFile = getVehicles();
         Vehicle toReturn = vehiclesFromFile.get(id);
 
-        if(toReturn.isRented()) {
+        if (toReturn.isRented()) {
             toReturn.setRented(false);
             vehiclesFromFile.set(id, toReturn);
 
-            try(FileWriter fw = new FileWriter("cars.txt", false)) {
+            /*
+                        try (FileWriter fw = new FileWriter("cars.txt", false)) {
                 for (Vehicle vehicle : vehiclesFromFile) {
                     fw.write(vehicle.toCsv());
                 }
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+             */
+                save(vehiclesFromFile);
 
         }
     }
@@ -65,13 +69,12 @@ public class RentingManager implements IVVehicleRepository {
         List<Vehicle> vehiclesFromCsv = new ArrayList<>(10);
 
 
-
         File file = new File("cars.txt");
 
         try {
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
-                if(vehiclesFromCsv.size() == 10) break;
+                if (vehiclesFromCsv.size() == 10) break;
                 String car = scanner.nextLine();
 
                 String[] attributes = car.split(";");
@@ -89,22 +92,19 @@ public class RentingManager implements IVVehicleRepository {
                 }
             }
             scanner.close();
-        }catch (FileNotFoundException ex) {
+        } catch (FileNotFoundException ex) {
             throw new RuntimeException(ex);
         }
         return vehiclesFromCsv;
     }
 
-    public void save(Vehicle vehicle) {
-        String csvLine = vehicle.toCsv();
-
-        try(FileWriter writer = new FileWriter("cars.txt")) {
-            writer.write(csvLine+"\n");
-
+    public void save(List<Vehicle> vehiclesToSave) {
+        try (FileWriter fw = new FileWriter("cars.txt", false)) {
+            for (Vehicle vehicle : vehiclesToSave) {
+                fw.write(vehicle.toCsv());
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-
-
 }
