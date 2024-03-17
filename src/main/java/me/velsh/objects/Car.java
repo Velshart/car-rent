@@ -19,6 +19,6 @@ public class Car extends Vehicle {
 
     @Override
     public String toCsv() {
-        return "c;"+super.toCsv()+id+";"+"\n";
+        return "c;" + super.toCsv() + id + ";" + "\n";
     }
 }

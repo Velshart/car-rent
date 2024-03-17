@@ -13,12 +13,9 @@ public class Main {
         RentingManager rentingManager = new RentingManager();
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("--------");
-        System.out.println("0- wyswietl oferte");
-        System.out.println("1- wypozycz pojazd");
-        System.out.println("2- zwroc pojazd");
-        System.out.println("--------");
+        printAvailableCommands();
 
+        WHILE_LOOP:
         while(true) {
             String operation = sc.nextLine();
             switch (operation) {
@@ -45,6 +42,8 @@ public class Main {
                     rentingManager.rentVehicle(idToRent);
                     if (!availableVehiclesToRent.get(idToRent).isRented()) {
                         System.out.println("Pomyslnie wypozyczono pojazd " + idToRent + ".");
+
+                        printAvailableCommands();
                     } else {
                         System.out.println("Ten pojazd zostal juz wypozyczony.");
                     }
@@ -53,14 +52,30 @@ public class Main {
                     List<Vehicle> allAvailableVehicles = rentingManager.getVehicles();
                     System.out.println("Podaj id pojazdu do zwrotu: ");
                     int idToReturn = Integer.parseInt(sc.nextLine());
+
                     if (allAvailableVehicles.get(idToReturn).isRented()) {
                         rentingManager.returnVehicle(idToReturn);
                         System.out.println("Pomyslnie zwrocono pojazd " + idToReturn + ".");
+
+                        printAvailableCommands();
                     } else {
                         System.out.println("Ten pojazd nie zostal wypozyczony.");
                     }
                 }
+                case "3" -> {
+                    System.out.println("Zapraszamy ponownie!");
+                    break WHILE_LOOP;
+                }
             }
         }
+    }
+
+    private static void printAvailableCommands() {
+        System.out.println("--------");
+        System.out.println("0- wyswietl oferte");
+        System.out.println("1- wypozycz pojazd");
+        System.out.println("2- zwroc pojazd");
+        System.out.println("3- wyjdz");
+        System.out.println("--------");
     }
 }

@@ -27,6 +27,6 @@ public class Motorcycle extends Vehicle {
 
     @Override
     public String toCsv() {
-        return "m;"+super.toCsv()+kategoria+";"+id+";"+"\n";
+        return "m;" + super.toCsv() + kategoria + ";" + id + ";" + "\n";
     }
 }

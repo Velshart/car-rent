@@ -1,10 +1,10 @@
 package me.velsh.abstraction;
 
 public abstract class Vehicle {
-    private String brand;
-    private String model;
-    private int year;
-    private int price;
+    private final String brand;
+    private final String model;
+    private final int year;
+    private final int price;
     private boolean rented;
 
     private static int id = 0;
@@ -47,7 +47,7 @@ public abstract class Vehicle {
     }
 
     public String toCsv() {
-        return brand+";"+model+";"+year+";"+price+";"+rented+";";
+        return brand + ";" + model + ";" + year + ";" + price + ";" + rented + ";";
     }
 
     @Override

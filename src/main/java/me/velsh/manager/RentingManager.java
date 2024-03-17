@@ -14,11 +14,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class RentingManager implements IVVehicleRepository {
-    private final List<Vehicle> vehicles;
-
-    public RentingManager() {
-        this.vehicles = getVehicles();
-    }
 
     @Override
     public void rentVehicle(int id) {
@@ -28,15 +23,7 @@ public class RentingManager implements IVVehicleRepository {
         if (!toRent.isRented()) {
             toRent.setRented(true);
             vehiclesFromFile.set(id, toRent);
-            /*
-                 try(FileWriter fw = new FileWriter("cars.txt", false)) {
-                for (Vehicle vehicle : vehiclesFromFile) {
-                    fw.write(vehicle.toCsv());
-                }
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-             */
+
             save(vehiclesFromFile);
         }
     }
@@ -49,16 +36,6 @@ public class RentingManager implements IVVehicleRepository {
         if (toReturn.isRented()) {
             toReturn.setRented(false);
             vehiclesFromFile.set(id, toReturn);
-
-            /*
-                        try (FileWriter fw = new FileWriter("cars.txt", false)) {
-                for (Vehicle vehicle : vehiclesFromFile) {
-                    fw.write(vehicle.toCsv());
-                }
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-             */
                 save(vehiclesFromFile);
 
         }
@@ -74,7 +51,7 @@ public class RentingManager implements IVVehicleRepository {
         try {
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
-                if (vehiclesFromCsv.size() == 10) break;
+                //if (vehiclesFromCsv.size() == 10) break;
                 String car = scanner.nextLine();
 
                 String[] attributes = car.split(";");
